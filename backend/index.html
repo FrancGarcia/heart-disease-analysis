@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Disease Prediction</title>
+</head>
+<body>
+    <h1>Heart Disease Prediction</h1>
+    
+    <form id="prediction-form">
+        <label for="age">Age:</label><br>
+        <input type="number" id="age" name="age"><br><br>
+
+        <label for="weight">Weight (kg):</label><br>
+        <input type="number" id="weight" name="weight"><br><br>
+
+        <label for="cholesterol">Cholesterol Level:</label><br>
+        <input type="number" id="cholesterol" name="cholesterol"><br><br>
+
+        <label for="blood_pressure">Blood Pressure:</label><br>
+        <input type="number" id="blood_pressure" name="blood_pressure"><br><br>
+
+        <label for="sugar">Sugar Level (1 for high, 0 for low):</label><br>
+        <input type="number" id="sugar" name="sugar"><br><br>
+
+        <label for="family_history">Family History of Heart Disease (1 for yes, 0 for no):</label><br>
+        <input type="number" id="family_history" name="family_history"><br><br>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <h2 id="result"></h2>
+
+    <script>
+        document.getElementById('prediction-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Collect input values from the form
+            const data = {
+                age: document.getElementById('age').value,
+                weight: document.getElementById('weight').value,
+                cholesterol: document.getElementById('cholesterol').value,
+                blood_pressure: document.getElementById('blood_pressure').value,
+                sugar: document.getElementById('sugar').value,
+                family_history: document.getElementById('family_history').value
+            };
+
+            // Send the data to the backend via a POST request
+            fetch('http://127.0.0.1:5000/predict', {  // Change the URL here
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+})
+.then(response => response.json())
+.then(data => {
+    const resultElement = document.getElementById('result');
+    if (data.prediction) {
+        resultElement.innerHTML = `Prediction: ${data.prediction}`;
+    } else {
+        resultElement.innerHTML = `Error: ${data.error}`;
+    }
+})
+.catch(error => {
+    console.error('Error:', error);
+});
+
+        });
+    </script>
+</body>
+</html>
