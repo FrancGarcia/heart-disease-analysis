@@ -16,4 +16,4 @@
 
 ## TODO
 
-1. can we figure out what is the main factor that lead to obeservation 3?
+1. can we figure out what is the main factor that lead to obeservation c?
