@@ -11,7 +11,7 @@ import App from './App.jsx'
 
 // document.getElementById('root') finds the <div id="root"> in the index.html file
 // Then createRoot() creates a React root and attaches it to the root div found in index.html
-// To actually render and run the React App
+// to actually render and run the React App
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     {/* Must call the App React component to finally render it */}

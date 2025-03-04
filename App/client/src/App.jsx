@@ -31,7 +31,7 @@ function App() {
       family_history: familyHistory,
     };
 
-    // Send POST request to Flask backend as JSON format string via HTTP
+    // Send HTTP POST request to Flask backend as JSON format string
     try {
       const response = await fetch('http://127.0.0.1:5000/predict', {
         method: 'POST',
@@ -56,6 +56,7 @@ function App() {
 
   // Create the UI and return it as a React component
   return (
+    // This is one instance of where the HTML/CSS is integrated
     <div className="form-container">
       <h2>Heart Disease Prediction</h2>
       {/* On submit button, render all of the React state variables with the user input, 
@@ -114,4 +115,7 @@ function App() {
   );
 }
 
+// Need to incldue this line to actually be able to use
+// this App component elsewhere namely in the main.jsx file
+// This is similar to "returning" or "importing and exporting" packages in Python
 export default App;
