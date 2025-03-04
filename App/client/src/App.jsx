@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
 import './App.css';
 
+/**
+ * Used to initalize a React App component to export and render for the app UI
+ * @return The React App component for export and use by the main.jsx file
+ */
 function App() {
+  // Create the state variables for user input and initially set them to empty strings
   const [age, setAge] = useState('');
   const [weight, setWeight] = useState('');
   const [cholesterol, setCholesterol] = useState('');
@@ -10,10 +15,13 @@ function App() {
   const [familyHistory, setFamilyHistory] = useState('');
   const [prediction, setPrediction] = useState('');
 
+  // Prevents page from reloading when the form is submitted
+  // This is called when the user clicks on the "Submit" button 
+  // as handled by the onSubmit event-handler as seen below
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // Create data object from the form
+    // Create data object from the form and store the user input in it to use in the HTTP POST
     const data = {
       age,
       weight,
@@ -23,15 +31,17 @@ function App() {
       family_history: familyHistory,
     };
 
+    // Send POST request to Flask backend as JSON format string via HTTP
     try {
       const response = await fetch('http://127.0.0.1:5000/predict', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
+        // Convert the data from above into a JSON string
         body: JSON.stringify(data),
       });
-
+      // Wait for the response and parse it into a JSON
       const result = await response.json();
       if (result.prediction) {
         setPrediction(result.prediction);
@@ -44,9 +54,13 @@ function App() {
     }
   };
 
+  // Create the UI and return it as a React component
   return (
     <div className="form-container">
       <h2>Heart Disease Prediction</h2>
+      {/* On submit button, render all of the React state variables with the user input, 
+      package them into a JSON string as seen above, and use them to make a POST request to Flask backend
+      using the handleSubmit React function above*/}
       <form onSubmit={handleSubmit}>
         <label>Age:</label>
         <input
@@ -90,9 +104,11 @@ function App() {
           onChange={(e) => setFamilyHistory(e.target.value)}
           required
         />
+        {/* Attach the submit event-handler to call handleSubmit React
+        function from above whenever the Submit button is clicked on */}
         <button type="submit">Submit</button>
       </form>
-
+      {/* Display the prediction response received from the Flask backend */}
       <h2>{prediction}</h2>
     </div>
   );
