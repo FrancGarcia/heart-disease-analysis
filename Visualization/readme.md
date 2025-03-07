@@ -13,7 +13,7 @@
       7. There is a significant relationship between Stress Level and Heart Disease by chi-square
       8. sleep hours have no significant effect on heart disease by t-test
       9. sleep hours and stress level has no significant relation by ANOVA
-      10. alcohole consumption significantly affects the heart disease rate between gender
+      10. alcohol consumption significantly affects the heart disease rate between gender
 
 ## TODO
 
