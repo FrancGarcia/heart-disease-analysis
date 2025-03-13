@@ -3,6 +3,15 @@ import random
 class Patient:
     def __init__(self, age, gender, bmi, blood_pressure, stress_level, 
                  alcohol_consumption, cholesterol_level, diabetes):
+        assert isinstance(age, (int, float)) and age > 0, "Age must be a positive number."
+        assert gender in ["Male", "Female"], "Gender must be 'Male' or 'Female'."
+        assert isinstance(bmi, (int, float)) and bmi > 0, "BMI must be a positive number."
+        assert isinstance(blood_pressure, (int, float)) and blood_pressure > 0, "Blood Pressure must be a positive number."
+        assert stress_level in ["Low", "Medium", "High"], "Stress Level must be 'Low', 'Medium', or 'High'."
+        assert alcohol_consumption in ["Low", "Medium", "High"], "Alcohol Consumption must be 'Low', 'Medium', or 'High'."
+        assert isinstance(cholesterol_level, (int, float)) and cholesterol_level > 0, "Cholesterol Level must be a positive number."
+        assert diabetes in ["Yes", "No"], "Diabetes must be 'Yes' or 'No'."
+
         self.age = age
         self.gender = gender
         self.bmi = bmi
