@@ -2,7 +2,7 @@
 ## Components:
 ### Analysis Pipeline with data cleaning and visualization
 ### ML Model to predict patient outcome given their data
-### Simple webapp with the ML model running in the background on Flask API and simple frontend using HTML
+### Simple webapp with the ML model running in the background on Flask API and simple frontend using React + Vite
 
 To run the app:
 1) Open one terminal and run $ cd App/server
