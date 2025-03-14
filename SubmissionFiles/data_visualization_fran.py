@@ -40,7 +40,7 @@ def create_histoplot(dataframe: pd.DataFrame, x: str, hue: str, cat: str = None)
 
     if cat == "Cholesterol Category":
         # 3-variable distribution with Cholesterol 
-        g = sns.FacetGrid(dataframe, col=cat, hue=hue, height=4, aspect=1.2, sharex=True, sharey=True, palette={"No": "darkred", "Yes": "darkgreen"}, hue_order=["Yes", "No"], col_order=["Normal", "Elevated", "High"])
+        g = sns.FacetGrid(data=dataframe, col=cat, hue=hue, height=4, aspect=1.2, sharex=True, sharey=True, palette={"No": "darkred", "Yes": "darkgreen"}, hue_order=["Yes", "No"], col_order=["Normal", "Elevated", "High"])
         g.map(sns.histplot, x, kde=True, bins=30, stat="density", common_norm=False)
         g.add_legend()
         if cat:
@@ -55,14 +55,14 @@ def create_histoplot(dataframe: pd.DataFrame, x: str, hue: str, cat: str = None)
         return
     elif cat != "Cholesterol Category" and cat is not None:
         # 3-variable distribution that is NOT Cholesterol
-        g = sns.FacetGrid(dataframe, col=cat, hue=hue, height=4, aspect=1.2, sharex=True, sharey=True, palette={"No": "darkred", "Yes": "darkgreen"}, hue_order=["Yes", "No"], col_order=dataframe[cat].unique())
+        g = sns.FacetGrid(data=dataframe, col=cat, hue=hue, height=4, aspect=1.2, sharex=True, sharey=True, palette={"No": "darkred", "Yes": "darkgreen"}, hue_order=["Yes", "No"], col_order=dataframe[cat].unique())
         g.map(sns.histplot, x, kde=True, bins=30, stat="density", common_norm=False)
         g.add_legend()
         plt.show()
         return
     elif cat is None:
         # 2-variable distribution
-        g = sns.histplot(dataframe, x=x, hue=hue, kde=True, bins=30, stat="density", common_norm=False, hue_order=["Yes", "No"], palette={"Yes": "darkgreen", "No": "darkred"})
+        g = sns.histplot(data=dataframe, x=x, hue=hue, kde=True, bins=30, stat="density", common_norm=False, hue_order=["Yes", "No"], palette={"Yes": "darkgreen", "No": "darkred"})
         plt.title(f"{x} Distribution by {hue}")
         plt.show()
         return
