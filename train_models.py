@@ -38,7 +38,6 @@ def load_data(file_path: str):
     :return: A DataFrame object of the csv data
     """
     assert(isinstance(file_path, str)), "File path must be a valid path"
-    # file_path = "./data/heart_disease.csv"
     df = pd.read_csv(file_path)
     return df
 
@@ -82,7 +81,7 @@ def preprocess_for_xgboost(df, label_columns):
         df[col] = le.fit_transform(df[col])
         label_encoders[col] = le  # Save encoders for future use
 
-    X = df.drop(columns=label_columns)  # Replace with actual target column
+    X = df.drop(columns=label_columns) 
     y = df[list(label_columns)]
     scaler = StandardScaler()
     X.iloc[:, :] = scaler.fit_transform(X)
@@ -93,14 +92,13 @@ def preprocess_for_xgboost(df, label_columns):
     X_train, X_temp, y_train, y_temp = train_test_split(X, y, test_size=0.3, random_state=42, stratify=y)
     X_valid, X_test, y_valid, y_test = train_test_split(X_temp, y_temp, test_size=0.5, random_state=42, stratify=y_temp)
 
-    imputer = SimpleImputer(strategy="mean")  # You can use "median" or "most_frequent"
+    imputer = SimpleImputer(strategy="mean") 
     X_train = imputer.fit_transform(X_train)
     X_valid = imputer.transform(X_valid)
     X_test = imputer.transform(X_test)
 
     X_train_balanced, y_train_balanced = smote.fit_resample(X_train, y_train)
     dtrain = xgb.DMatrix(X_train_balanced, label=y_train_balanced)
-    # dtrain = xgb.DMatrix(X_train, label=y_train)
     dvalid = xgb.DMatrix(X_valid, label=y_valid)
     dtest = xgb.DMatrix(X_test, label=y_test)
 
@@ -115,13 +113,12 @@ def evaluate_model_xgboost(model, dtest):
 
     :return: Accuracy score of the model on the test dataset.
     """
-    
-    # Assertions to check the types and validity of inputs
     assert isinstance(model, xgb.Booster), "Model must be a trained XGBoost Booster object"
     assert isinstance(dtest, xgb.DMatrix), "dtest must be an XGBoost DMatrix object"
     y_pred_proba = model.predict(dtest)
-    y_pred = (y_pred_proba > 0.5).astype(int)  # Convert probabilities to binary values
+    y_pred = (y_pred_proba > 0.5).astype(int) 
     y_test = dtest.get_label()
+
     # Print Accuracy and Classification Report
     print(classification_report(y_test, y_pred))
     xgb.plot_importance(model)
@@ -170,7 +167,7 @@ def train_xgboost(dtrain, dvalid, dtest, verbose = True, *args, **kwargs):
         dtrain=dtrain,
         num_boost_round=1000,
         evals=evals,
-        early_stopping_rounds=50,  # Stops if validation loss doesn't improve
+        early_stopping_rounds=50,  
         verbose_eval=50 if verbose else False
     )
     if verbose:
@@ -313,7 +310,7 @@ def get_predictions_from_nn(loader, model):
 
 
     model_device = next(model.parameters()).device
-    model.eval()  # Set model to evaluation mode
+    model.eval()  
 
     all_preds = []
     all_labels = []
@@ -325,9 +322,9 @@ def get_predictions_from_nn(loader, model):
             y = y.to(device=model_device, dtype=torch.float32)
             scores = model(x)
             score_array.extend(scores.cpu().numpy())
-            _, preds = scores.max(1)  # Get predicted class
-            all_preds.extend(preds.cpu().numpy())  # Store predictions
-            all_labels.extend(y.cpu().numpy())  # Store true labels
+            _, preds = scores.max(1)  
+            all_preds.extend(preds.cpu().numpy())  
+            all_labels.extend(y.cpu().numpy())  
     scores = np.array(score_array)
     all_preds = (scores[:,0] < scores[:,1])+0.0
     all_labels = np.array(all_labels)
@@ -347,7 +344,6 @@ def plot_confusion_matrix(y_true, y_pred, class_names):
     :raises ValueError: If the number of class names does not match the confusion matrix dimensions.
     """
     
-    # Ensure the inputs are valid
     assert isinstance(y_true, (list, np.ndarray)), "y_true must be a list or numpy array."
     assert isinstance(y_pred, (list, np.ndarray)), "y_pred must be a list or numpy array."
     assert len(y_true) == len(y_pred), "y_true and y_pred must have the same length."
@@ -414,7 +410,7 @@ def timeit(func):
     @wraps(func)
     def wrapper(*args, **kwargs):
         start_time = time.time()
-        result = func(*args, **kwargs)  # Call the actual function
+        result = func(*args, **kwargs) 
         end_time = time.time()
         print(f"Training time: {end_time - start_time:.1f} seconds")
         return result
@@ -462,7 +458,6 @@ def train(model, optimizer, train_loader, val_loader, epochs=200, class_weights 
         - loss_list: List of total losses across epochs.
     """
 
-    # Assertions for input validation
     assert isinstance(model, (nn.Module, nn.Sequential)), "model must be an nn.Module or nn.Sequential"
     assert isinstance(optimizer, optim.Optimizer), "optimizer must be an instance of optim.Optimizer"
     assert isinstance(train_loader, DataLoader), "train_loader must be a DataLoader object"
@@ -475,7 +470,7 @@ def train(model, optimizer, train_loader, val_loader, epochs=200, class_weights 
 
     if apply_kaiming_init:
         model.apply(init_kaiming_normal)
-    model = model.to(device=device)  # move the model parameters to CPU/GPU
+    model = model.to(device=device)  
     class_weights = torch.tensor(class_weights, dtype= torch.float32)
     class_weights = class_weights.to(device=device)
     criterion = nn.CrossEntropyLoss(weight=class_weights)
@@ -487,8 +482,8 @@ def train(model, optimizer, train_loader, val_loader, epochs=200, class_weights 
     for e in range(epochs):
         total_loss = 0
         for t, (x, y) in enumerate(train_loader):
-            model.train()  # put model to training mode
-            x = x.to(device=device, dtype=torch.float32)  # move to device, e.g. GPU
+            model.train()
+            x = x.to(device=device, dtype=torch.float32)
             y = y.to(device=device, dtype=torch.long)
             scores = model(x)
             loss = criterion(scores, y)
@@ -506,15 +501,12 @@ def train(model, optimizer, train_loader, val_loader, epochs=200, class_weights 
                 best_acc = acc
                 best_model_state = copy(model.state_dict())
         if verbose and e%print_every == 0:
-        # print('\tEpoch %d, loss = %.4f' % (e, loss.item()))
             print('\tEpoch %d, loss = %.4f' % (e, total_loss))
 
     acc = validation_accuracy(val_loader, model)
     if acc > best_acc:
         best_acc = acc
         best_model_state = copy(model.state_dict())
-    # print(scores)
-
 
     return best_acc, best_model_state, loss_list
 
@@ -541,8 +533,6 @@ def train_neural_network(
 
     :return: The best trained model after optimization.
     """
-    
-    # Validating inputs
     assert isinstance(train_loader, torch.utils.data.DataLoader), "train_loader must be a DataLoader object"
     assert isinstance(val_loader, torch.utils.data.DataLoader), "val_loader must be a DataLoader object"
     assert isinstance(num_epochs, int) and num_epochs > 0, "num_epochs must be a positive integer"
@@ -655,7 +645,6 @@ def load_model(filename, USE_GPU = True):
 
     :return: A PyTorch model loaded from the file
     """
-    # Validate input
     assert isinstance(filename, str), "filename must be a string"
     assert os.path.isfile(filename), f"File not found: {filename}"
     assert isinstance(USE_GPU, bool), "USE_GPU must be a boolean value"
