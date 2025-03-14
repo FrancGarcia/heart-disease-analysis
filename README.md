@@ -16,7 +16,7 @@ To run the app:
 ## Folder Structure
 ### 1. Data visualization:
 - **[SubmissionFiles](./SubmissionFiles-Final-Version/)**  
-    - **Our Final version of results and code**
+    - **Our final submission of results and code for the project**
     - Data cleaning
     - Data visualization modules 
     - Visualization plots
@@ -28,6 +28,7 @@ To run the app:
 
 - [DataProcessing-Backup](./DataProcessing-Backup/)  
     - Old Version - dataset cleaning code 
+    - Testing code for data processing
 
 ### 3. ML Model:  
 - [ML-Model](./ML-Model/)  
