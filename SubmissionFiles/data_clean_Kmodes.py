@@ -120,7 +120,7 @@ def clean_data_Kmodes(data_frame):
     return data_frame
 
 def main():
-    df = load_data("heart_disease.csv")
+    df = load_data("../data/heart_disease.csv")
     cleaned_df = clean_data_Kmodes(df)
     return cleaned_df
     # cleaned_df.to_csv("cleaned_heart_disease_kmodes.csv", index=False) 
