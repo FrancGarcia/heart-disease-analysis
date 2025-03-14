@@ -12,6 +12,7 @@ To run the app:
 5) Then in that same terminal run $ npm run dev to activate the frontend and follow the provided link after execution
 6) Try out the frontend to see if you're susceptible to heart disease!
 
+
 ## Folder Structure:
 [App](./App/)  
 - Contains code for our webapp  
@@ -30,4 +31,5 @@ To run the app:
 
 [SubmissionFiles](./SubmissionFiles/)  
 - Data visualization modules and visualization plots
+
 

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Heart Disease Prediction Form</title>
+        <style>
+            /* Center the form */
+            body {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                margin: 0;
+                background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuo0z6htuJIFoAqJ01-EuoeYON6_KF0APiDA&s') no-repeat center center/cover;
+                position: relative;
+            }
+
+            /* Create a blur effect */
+            body::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                backdrop-filter: blur(8px); /* Adjust blur intensity */
+                background-color: rgba(0, 0, 0, 0.2); /* Optional dark overlay */
+                z-index: -1;
+            }
+
+            /* Form container styling */
+            .form-container {
+                background: rgba(255, 255, 255, 0.85); /* Semi-transparent white */
+                padding: 20px;
+                border-radius: 10px;
+                box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+                width: 350px;
+                text-align: center;
+            }
+    
+            h2 {
+                color: #333;
+            }
+    
+            form {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+    
+            label {
+                font-weight: bold;
+                margin-top: 10px;
+                width: 100%;
+                text-align: left;
+            }
+    
+            input {
+                width: 90%;
+                padding: 8px;
+                margin: 5px 0;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                font-size: 16px;
+            }
+    
+            button {
+                margin-top: 15px;
+                padding: 10px;
+                background: #007bff;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                font-size: 16px;
+                width: 100%;
+            }
+    
+            button:hover {
+                background: #0056b3;
+            }
+        </style>
+    </head>
+    <body>
+    
+        <div class="form-container">
+            <h2>Heart Disease Prediction</h2>
+            <form id="prediction-form">
+                <label for="age">Age:</label>
+                <input type="number" id="age" name="age" required>
+    
+                <label for="weight">Weight (kg):</label>
+                <input type="number" id="weight" name="weight" required>
+    
+                <label for="cholesterol">Cholesterol Level:</label>
+                <input type="number" id="cholesterol" name="cholesterol" required>
+    
+                <label for="blood_pressure">Blood Pressure:</label>
+                <input type="number" id="blood_pressure" name="blood_pressure" required>
+    
+                <label for="sugar">Sugar Level (1 for high, 0 for low):</label>
+                <input type="number" id="sugar" name="sugar" required>
+    
+                <label for="family_history">Family History of Heart Disease (1 for yes, 0 for no):</label>
+                <input type="number" id="family_history" name="family_history" required>
+    
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    
+
+    
+    <h2 id="result"></h2>
+
+    <script>
+        document.getElementById('prediction-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            alert("Form submitted successfully! 🎉");
+            // Collect input values from the form
+            const data = {
+                age: document.getElementById('age').value,
+                weight: document.getElementById('weight').value,
+                cholesterol: document.getElementById('cholesterol').value,
+                blood_pressure: document.getElementById('blood_pressure').value,
+                sugar: document.getElementById('sugar').value,
+                family_history: document.getElementById('family_history').value
+            };
+
+            // Send the data to the backend via a POST request
+            fetch('http://127.0.0.1:5000/predict', {  // Change the URL here
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+})
+.then(response => response.json())
+.then(data => {
+    const resultElement = document.getElementById('result');
+    if (data.prediction) {
+        resultElement.innerHTML = `Prediction: ${data.prediction}`;
+    } else {
+        resultElement.innerHTML = `Error: ${data.error}`;
+    }
+})
+.catch(error => {
+    console.error('Error:', error);
+});
+
+        });
+    </script>
+</body>
+</html>
