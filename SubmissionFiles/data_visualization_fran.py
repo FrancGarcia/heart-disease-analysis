@@ -67,19 +67,19 @@ def create_histoplot(dataframe: pd.DataFrame, x: str, hue: str, cat: str = None)
         plt.show()
         return
 
-if __name__ == "__main__":
-    df = pd.read_csv("../data/equal_distribution_hds.csv")
+# if __name__ == "__main__":
+#     df = pd.read_csv("../data/equal_distribution_hds.csv")
 
-    create_histoplot(df, "BMI", "Heart Disease Status")
-    create_histoplot(df, "BMI", "Heart Disease Status", col="Cholesterol Category")
+#     create_histoplot(df, "BMI", "Heart Disease Status")
+#     create_histoplot(df, "BMI", "Heart Disease Status", col="Cholesterol Category")
 
-    create_histoplot(df, "Stress Level", "Heart Disease Status")
-    create_histoplot(df, "Stress Level", "Heart Disease Status", col="Alcohol Consumption")
+#     create_histoplot(df, "Stress Level", "Heart Disease Status")
+#     create_histoplot(df, "Stress Level", "Heart Disease Status", col="Alcohol Consumption")
 
-    create_histoplot(df, "Blood Pressure", "Heart Disease Status")
-    create_histoplot(df, "Blood Pressure Category", "Heart Disease Status", col="Diabetes")
+#     create_histoplot(df, "Blood Pressure", "Heart Disease Status")
+#     create_histoplot(df, "Blood Pressure Category", "Heart Disease Status", col="Diabetes")
 
-    produce_pie_charts(df, "Stress Level", "Heart Disease Status")
-    produce_pie_charts(df, "High Blood Pressure", "Heart Disease Status")
-    produce_pie_charts(df, 'Low HDL Cholesterol', 'Heart Disease Status')
-    produce_pie_charts(df, "High LDL Cholesterol", "Heart Disease Status")
+#     produce_pie_charts(df, "Stress Level", "Heart Disease Status")
+#     produce_pie_charts(df, "High Blood Pressure", "Heart Disease Status")
+#     produce_pie_charts(df, 'Low HDL Cholesterol', 'Heart Disease Status')
+#     produce_pie_charts(df, "High LDL Cholesterol", "Heart Disease Status")

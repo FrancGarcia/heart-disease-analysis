@@ -161,7 +161,16 @@ def run():
     return df_cleaned_drop, df_cleaned_knn
 
 
-if __name__ == "__main__":
+def main():
+    """
+    Main function for cleaning the dataset and balancing the rows between
+    "No Heart Disease" and "Heart Disease" Status to reduce bias in the 
+    machine learning model as well as the analytics. Adds new columns
+    that store the numerical data of "Cholesterol Level", "BMI" and
+    "Blood Pressure" as categorical data for easy data visualization. 
+
+    Use this for your final cleaned dataset for visualization.
+    """
 
     df_cleaned_drop, df_cleaned_knn = run()
 
@@ -177,7 +186,6 @@ if __name__ == "__main__":
     print(f"Number of men in clean with KNN: {num_men_knn}")
     print(f"Number of women in clean with KNN: {num_women_knn}")
 
-
     # Use the KNN_Imputer Method and get equal distrubtion of heart disease
     # status to prevent bias in dataset (previous was bias towards no heart disease)
     cleaned_data = drop_random_rows_no_heart_disease(df_cleaned_knn)
@@ -190,7 +198,7 @@ if __name__ == "__main__":
         labels=["Normal", "Elevated", "High"],  
         right=True  
     )
-    cleaned_data['Blood Pressure Category'] = pd.Categorical(cleaned_data['Blood Pressure Category'], categories=["Normal", "Elevated", "High"], ordered=True)
+    cleaned_data['Cholesterol Category'] = pd.Categorical(cleaned_data['Cholesterol Category'], categories=["Normal", "Elevated", "High"], ordered=True)
 
     # Create a new column that quantizes the BMI ranges
     cleaned_data["BMI Category"] = pd.cut(
@@ -199,7 +207,7 @@ if __name__ == "__main__":
         labels=["Underweight", "Normal", "Overweight", "Obese"],  
         right=True  # Include right edge in the bin
     )
-    cleaned_data['Blood Pressure Category'] = pd.Categorical(cleaned_data['Blood Pressure Category'], categories=["Underweight", "Normal", "Overweight", "Obese"], ordered=True)
+    cleaned_data['BMI Category'] = pd.Categorical(cleaned_data['BMI Category'], categories=["Underweight", "Normal", "Overweight", "Obese"], ordered=True)
 
     # Create a new column that quantizes the Blood Pressure ranges
     cleaned_data["Blood Pressure Category"] = pd.cut(
@@ -210,7 +218,6 @@ if __name__ == "__main__":
     )
     cleaned_data['Blood Pressure Category'] = pd.Categorical(cleaned_data['Blood Pressure Category'], categories=["Normal", "Elevated", "High", "Very High"], ordered=True)
 
-    print(cleaned_data["Stress Level"].value_counts())
-    print(cleaned_data["Alcohol Consumption"].value_counts())
-
     cleaned_data.to_csv("../data/equal_distribution_hds.csv")
+
+    return cleaned_data
