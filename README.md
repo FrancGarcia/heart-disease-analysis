@@ -1,4 +1,4 @@
-# heart-disease-analysis
+# UCSD-ECE143-heart-disease-analysis
 ## Components:
 ### Analysis Pipeline with data cleaning and visualization
 ### ML Model to predict patient outcome given their data
@@ -13,23 +13,38 @@ To run the app:
 6) Try out the frontend to see if you're susceptible to heart disease!
 
 
-## Folder Structure:
-[App](./App/)  
+## Folder Structure
+### Data visualization:
+**[SubmissionFiles](./SubmissionFiles/)**  
+- **Our Final version of results and code**
+- Data visualization modules and visualization plots
+
+### Data Processing:
+[data](./data/)  
+- Original dataset
+- After cleaning datasets using hds, kmodes and majority
+
+[DataProcessing](./DataProcessing/)  
+- Data cleaning code for the dataset
+
+### Web App related:  
+-[App](./App/)  
 - Contains code for our webapp  
 
 [backend](./Backend/)  
 - Contains backend code for our webapp  
 
-[data](./data/)  
-- Original, and after cleaning datasets
 
-[DataProcessing](./DataProcessing/)  
-- Data cleaning code for the dataset
-
+### Dependencies
 [dependencies](./dependencies/)  
 - Contains the python library requirements 
 
-[SubmissionFiles](./SubmissionFiles/)  
-- Data visualization modules and visualization plots
+
+## Authors:
+- Francisco Garcia
+- Qiyue Zhang
+- Chengming Li
+- Trivikram Choudhury
+- Shail Vaidya
 
 
