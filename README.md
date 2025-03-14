@@ -25,9 +25,15 @@ To run the app:
     - After cleaning datasets using hds, kmodes and majority
 
 - [DataProcessing](./DataProcessing/)  
-    - Data cleaning code for the dataset
+    - Dataset cleaning code
 
-### 3. Web App related:  
+### 3. ML Model:  
+- [ML-Model](./ML-Model/)  
+    - Contains modularized codes of how to train the model
+    - Model itself in .pth
+    - Plots of ML 
+
+### 4. Web App related:  
 - [App](./App/)  
     - Contains code for our webapp  
 
@@ -35,7 +41,7 @@ To run the app:
     - Contains backend code for our webapp  
 
 
-### 4. Dependencies
+### 5. Dependencies
 - [dependencies](./dependencies/)  
     - Contains the python library requirements 
 
