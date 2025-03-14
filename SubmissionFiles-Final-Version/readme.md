@@ -11,5 +11,5 @@
   - Data visualization and statistical analysis module from Qiyue Zhang
     - `compute_plot_heart_disease_associations`: Check the relationship of Heart Disease Status(categorical) with other factors
     - `compute_plot_indicators_associations_heatmap`: Plot the heatmap of indicators associations
-- [final_visualization.py](./final_visualization.py)
+- [visualization.ipynb](./visualization.ipynb)
   - Importing modules from above files, and generating data visualization plots
