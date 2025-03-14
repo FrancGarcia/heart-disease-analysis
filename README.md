@@ -35,13 +35,11 @@ To run the app:
     - Contains modularized codes of how to train the model
     - Model itself in .pth
     - Plots of ML 
+    - Testing code for ML trainning
 
 ### 4. Web App related:  
 - [App](./App/)  
     - Contains code for our webapp  
-
-- [backend](./backend/)  
-    - Contains backend code for our webapp  
 
 
 ### 5. Dependencies
