@@ -5,7 +5,7 @@
   - Data visualization module from Francisco Garcia
     - `produce_pie_charts`: Produces pie chart of percentage of people with
     the feature indicators that have heart disease.
-    - `create_histoplot`: Creates a histoplot given the dataframe, col, x and hue.
+    - `create_histoplot`: Creates a histoplot given the dataframe, cat, x and hue.
 
 - [data_visualization_kira.py](./data_visualization_kira.py)
   - Data visualization module from Qiyue Zhang

@@ -3,10 +3,6 @@ import numpy as np
 from sklearn.impute import KNNImputer
 from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import LabelEncoder
-from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import accuracy_score, classification_report
 from enum import Enum
 
 def load_data(file_path: str):
@@ -198,7 +194,7 @@ def main():
         labels=["Normal", "Elevated", "High"],  
         right=True  
     )
-    cleaned_data['Cholesterol Category'] = pd.Categorical(cleaned_data['Cholesterol Category'], categories=["Normal", "Elevated", "High"], ordered=True)
+    cleaned_data["Cholesterol Category"] = pd.Categorical(cleaned_data["Cholesterol Category"], categories=["Normal", "Elevated", "High"], ordered=True)
 
     # Create a new column that quantizes the BMI ranges
     cleaned_data["BMI Category"] = pd.cut(
@@ -207,7 +203,7 @@ def main():
         labels=["Underweight", "Normal", "Overweight", "Obese"],  
         right=True  # Include right edge in the bin
     )
-    cleaned_data['BMI Category'] = pd.Categorical(cleaned_data['BMI Category'], categories=["Underweight", "Normal", "Overweight", "Obese"], ordered=True)
+    cleaned_data["BMI Category"] = pd.Categorical(cleaned_data["BMI Category"], categories=["Underweight", "Normal", "Overweight", "Obese"], ordered=True)
 
     # Create a new column that quantizes the Blood Pressure ranges
     cleaned_data["Blood Pressure Category"] = pd.cut(
@@ -216,7 +212,10 @@ def main():
         labels=["Normal", "Elevated", "High", "Very High"],  
         right=True  
     )
-    cleaned_data['Blood Pressure Category'] = pd.Categorical(cleaned_data['Blood Pressure Category'], categories=["Normal", "Elevated", "High", "Very High"], ordered=True)
+    cleaned_data["Blood Pressure Category"] = pd.Categorical(cleaned_data["Blood Pressure Category"], categories=["Normal", "Elevated", "High", "Very High"], ordered=True)
+
+    cleaned_data["Stress Level"] = pd.Categorical(cleaned_data["Stress Level"], categories=["Low", "Medium", "High"], ordered=True)
+    cleaned_data["Alcohol Consumption"] = pd.Categorical(cleaned_data["Alcohol Consumption"], categories=["Low", "Medium", "High"], ordered=True)
 
     cleaned_data.to_csv("../data/equal_distribution_hds.csv")
 

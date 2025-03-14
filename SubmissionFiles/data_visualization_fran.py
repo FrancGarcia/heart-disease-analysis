@@ -36,11 +36,11 @@ def create_histoplot(dataframe: pd.DataFrame, x: str, hue: str, cat: str = None)
     assert(isinstance(dataframe, pd.DataFrame) and dataframe.shape[0] > 0), "First argument must be a valid dataframe"
     assert(isinstance(x, str) and len(x) > 0 and x in dataframe.columns), "Second argument must be valid feature in columns of dataframe"
     assert(isinstance(hue, str) and len(hue) > 0 and hue in dataframe.columns), "Third argument must be valid feature in columns of dataframe"
-    assert(isinstance(cat, str) and len(cat) > 0 and cat in dataframe.columns), "Fourth argument must be valid feature in columns of dataframe"
+    assert(cat is None or (isinstance(cat, str) and cat in dataframe.columns)), "Fourth argument must be valid feature in columns of dataframe"
 
     if cat == "Cholesterol Category":
         # 3-variable distribution with Cholesterol 
-        g = sns.FacetGrid(dataframe, col=cat, hue=hue, height=4, aspect=1.2, sharex=True, sharey=True, palette={"No": "darkred", "Yes": "darkgreen"}, hue_order=["Yes", "No"], col_order=dataframe[col].unique())
+        g = sns.FacetGrid(dataframe, col=cat, hue=hue, height=4, aspect=1.2, sharex=True, sharey=True, palette={"No": "darkred", "Yes": "darkgreen"}, hue_order=["Yes", "No"], col_order=["Normal", "Elevated", "High"])
         g.map(sns.histplot, x, kde=True, bins=30, stat="density", common_norm=False)
         g.add_legend()
         if cat:
@@ -55,7 +55,7 @@ def create_histoplot(dataframe: pd.DataFrame, x: str, hue: str, cat: str = None)
         return
     elif cat != "Cholesterol Category" and cat is not None:
         # 3-variable distribution that is NOT Cholesterol
-        g = sns.FacetGrid(dataframe, col=cat, hue=hue, height=4, aspect=1.2, sharex=True, sharey=True, palette={"No": "darkred", "Yes": "darkgreen"}, hue_order=["Yes", "No"], col_order=dataframe[col].unique())
+        g = sns.FacetGrid(dataframe, col=cat, hue=hue, height=4, aspect=1.2, sharex=True, sharey=True, palette={"No": "darkred", "Yes": "darkgreen"}, hue_order=["Yes", "No"], col_order=dataframe[cat].unique())
         g.map(sns.histplot, x, kde=True, bins=30, stat="density", common_norm=False)
         g.add_legend()
         plt.show()
@@ -63,23 +63,6 @@ def create_histoplot(dataframe: pd.DataFrame, x: str, hue: str, cat: str = None)
     elif cat is None:
         # 2-variable distribution
         g = sns.histplot(dataframe, x=x, hue=hue, kde=True, bins=30, stat="density", common_norm=False, hue_order=["Yes", "No"], palette={"Yes": "darkgreen", "No": "darkred"})
-        plt.title(f"{x} Distribution by {hue} Distribution")
+        plt.title(f"{x} Distribution by {hue}")
         plt.show()
         return
-
-# if __name__ == "__main__":
-#     df = pd.read_csv("../data/equal_distribution_hds.csv")
-
-#     create_histoplot(df, "BMI", "Heart Disease Status")
-#     create_histoplot(df, "BMI", "Heart Disease Status", col="Cholesterol Category")
-
-#     create_histoplot(df, "Stress Level", "Heart Disease Status")
-#     create_histoplot(df, "Stress Level", "Heart Disease Status", col="Alcohol Consumption")
-
-#     create_histoplot(df, "Blood Pressure", "Heart Disease Status")
-#     create_histoplot(df, "Blood Pressure Category", "Heart Disease Status", col="Diabetes")
-
-#     produce_pie_charts(df, "Stress Level", "Heart Disease Status")
-#     produce_pie_charts(df, "High Blood Pressure", "Heart Disease Status")
-#     produce_pie_charts(df, 'Low HDL Cholesterol', 'Heart Disease Status')
-#     produce_pie_charts(df, "High LDL Cholesterol", "Heart Disease Status")
