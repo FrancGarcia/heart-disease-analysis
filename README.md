@@ -11,3 +11,25 @@ To run the app:
 4) Open another terminal (without closing the first terminal) and run $ cd App/client
 5) Then in that same terminal run $ npm run dev to activate the frontend and follow the provided link after execution
 6) Try out the frontend to see if you're susceptible to heart disease!
+
+
+## Folder Structure:
+[App](./App/)  
+- Contains code for our webapp  
+
+[backend](./Backend/)  
+- Contains backend code for our webapp  
+
+[data](./data/)  
+- Original, and after cleaning datasets
+
+[DataProcessing](./DataProcessing/)  
+- Data cleaning code for the dataset
+
+[dependencies](./dependencies/)  
+- Contains the python library requirements 
+
+[SubmissionFiles](./SubmissionFiles/)  
+- Data visualization modules and visualization plots
+
+
