@@ -29,5 +29,5 @@ To run the app:
 - Contains the python library requirements 
 
 [SubmissionFiles](./SubmissionFiles/)  
-- Data visualization modules 
+- Data visualization modules and visualization plots
 
