@@ -17,15 +17,17 @@ To run the app:
 ### 1. Data visualization:
 - **[SubmissionFiles](./SubmissionFiles-Final-Version/)**  
     - **Our Final version of results and code**
-    - Data visualization modules and visualization plots
+    - Data cleaning
+    - Data visualization modules 
+    - Visualization plots
 
 ### 2. Data Processing:
 - [data](./data/)  
     - Original dataset
     - After cleaning datasets using hds, kmodes and majority
 
-- [DataProcessing](./DataProcessing/)  
-    - Dataset cleaning code
+- [DataProcessing-Backup](./DataProcessing-Backup/)  
+    - Old Version - dataset cleaning code 
 
 ### 3. ML Model:  
 - [ML-Model](./ML-Model/)  
