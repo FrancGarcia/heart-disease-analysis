@@ -14,12 +14,12 @@ To run the app:
 
 
 ## Folder Structure
-### Data visualization:
+### 1. Data visualization:
 - **[SubmissionFiles](./SubmissionFiles/)**  
     - **Our Final version of results and code**
     - Data visualization modules and visualization plots
 
-### Data Processing:
+### 2. Data Processing:
 - [data](./data/)  
     - Original dataset
     - After cleaning datasets using hds, kmodes and majority
@@ -27,7 +27,7 @@ To run the app:
 - [DataProcessing](./DataProcessing/)  
     - Data cleaning code for the dataset
 
-### Web App related:  
+### 3. Web App related:  
 - [App](./App/)  
     - Contains code for our webapp  
 
@@ -35,7 +35,7 @@ To run the app:
     - Contains backend code for our webapp  
 
 
-### Dependencies
+### 4. Dependencies
 - [dependencies](./dependencies/)  
     - Contains the python library requirements 
 
