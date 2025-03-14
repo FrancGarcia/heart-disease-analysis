@@ -15,7 +15,7 @@ To run the app:
 
 ## Folder Structure
 ### 1. Data visualization:
-- **[SubmissionFiles](./SubmissionFiles/)**  
+- **[SubmissionFiles](./SubmissionFiles-Final-Version/)**  
     - **Our Final version of results and code**
     - Data visualization modules and visualization plots
 
@@ -31,7 +31,7 @@ To run the app:
 - [App](./App/)  
     - Contains code for our webapp  
 
-- [backend](./Backend/)  
+- [backend](./backend/)  
     - Contains backend code for our webapp  
 
 
